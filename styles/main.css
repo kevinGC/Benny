@@ -1,0 +1,16 @@
+#songList {
+	float: left;
+	width: 10%;
+}
+
+#main {
+	float: left;
+	width: 70%;
+	margin-left: 10%;
+}
+
+#lyrics {
+	float: left;
+	width: 20%;
+	margin-left: 80%;
+}
