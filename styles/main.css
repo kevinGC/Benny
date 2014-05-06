@@ -1,16 +1,20 @@
-#songList {
+#songs {
 	float: left;
-	width: 10%;
+	width: 20%;
 }
 
 #main {
 	float: left;
-	width: 70%;
-	margin-left: 10%;
+	width: 40%;
 }
 
-#lyrics {
+#engLyrics {
 	float: left;
 	width: 20%;
-	margin-left: 80%;
 }
+
+#korLyrics {
+	float: left;
+	width: 20%;
+}
+

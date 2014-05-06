@@ -1,7 +1,8 @@
 // Defines a singleton SongManager with a getSong() function
 var SongManager = (function() {
 	// declare all songs
-	// todo separate file?
+	// TODO separate file?
+	// TODO some kind of Song/SongModel class
 	var songs = {
 		"Genie": {
 			"lines": [{
