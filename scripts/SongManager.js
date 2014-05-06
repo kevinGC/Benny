@@ -8,6 +8,7 @@ var SongManager = (function() {
 			"lines": [{
 				"english": "tell me your wish",
 				"korean": "소원을 말해봐!",
+				"startTime": 10,
 				"metadata": [
 					{ "start": 0, "len": 2, "info": "wish" },
 					{ "start": 2, "len": 1, "info": "object particle" },
@@ -17,6 +18,7 @@ var SongManager = (function() {
 				}, {
 				"english": "tell me that small dream you have within you",
 				"korean": "니 마음속에 있는 작은 꿈을 말해봐",
+				"startTime": 12,
 				"metadata": [
 					{ "start": 0, "len": 1, "info": "informal you" },
 					{ "start": 2, "len": 3, "info": "one's mind/heart" },
@@ -33,6 +35,7 @@ var SongManager = (function() {
 				}, {
 				"english": "draw that ideal person you have inside your head",
 				"korean": "니 머리에있는 이상형을 그려봐",
+				"startTime": 16,
 				"metadata": [
 					{ "start": 0, "len": 1, "info": "you" },
 					{ "start": 2, "len": 2, "info": "head/mind" },
@@ -44,7 +47,8 @@ var SongManager = (function() {
 					{ "start": 13, "len": 2, "info": "to draw" },
 					{ "start": 14, "len": 2, "info": "grammar: to try" }
 				]
-			}]
+				}
+			]
 		}
 	};
 
@@ -62,6 +66,15 @@ var SongManager = (function() {
 
 		getSongNames: function() {
 			return songNames.slice(); // aka slice(0) aka copied array
+		},
+
+		// TODO efficiency? Shouldn't matter in this case
+		lineInSong: function(song, time) {
+			for(var i = song.lines.length - 1; i >= 0; i--) {
+				if(song.lines[i].startTime < time)
+					return song.lines[i];
+			}
+			return null;
 		}
 	};
 
