@@ -23,16 +23,7 @@ def weave(songName):
 	for line in output:
 		songFile.write(line)
 
-# def JSONify(songName):
-# 	print "JSONifying " + songName
-# 	infile = open(songName + ".song", "r")
-# 	numLines = int(infile.readline())
-# 	print str(numLines) + " lines in file"
-# 	infile.readline()
-
-# 	# parse lines + grammar
-# 	print "here: " + infile.readline()
-
+		
 if __name__ == "__main__":
 	opts, args = getopt.getopt(sys.argv[1:], "j:w:")
 	if len(opts) == 0:

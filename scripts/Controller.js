@@ -25,10 +25,17 @@ var controller = (function() {
 		},
 
 		setLineWithTime: function(time) {
-			console.log("setGrammarWithTime(" + time + ")");
-			var line = SongManager.lineInSong(currentSong, time);
-			if(line) {
-				view.updateLine(line.english, line.korean, line.metadata);
+			console.log("setLineWithTime(" + time + ")");
+			var lineNum = SongManager.indexInSong(currentSong, time);
+			if(lineNum != null) {
+				view.updateLine(currentSong.lines[lineNum].english, 
+					currentSong.lines[lineNum].korean, 
+					currentSong.lines[lineNum].metadata);
+				if(lineNum + 1 < currentSong.lines.length) {
+					view.updateNextLine(currentSong.lines[lineNum + 1].english, 
+						currentSong.lines[lineNum + 1].korean, 
+						currentSong.lines[lineNum + 1].metadata)
+				}
 			}
 		}
 
