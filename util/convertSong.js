@@ -8,14 +8,14 @@ while(curLine < lines.length) {
 	var lyric = {};
 	lyric.english   = lines[curLine++];
 	lyric.korean    = lines[curLine++];
-	lyric.startTime = lines[curLine++];
+	lyric.startTime = parseInt(lines[curLine++]);
 	lyric.metadata  = [];
 
 	while(lines[curLine] !== '') {
 		var matches = lines[curLine++].match(/^(\d+) (\d+) (.*)$/);
 		lyric.metadata.push({
-			start  : matches[1],
-			length : matches[2],
+			start  : parseInt(matches[1]),
+			length : parseInt(matches[2]),
 			info   : matches[3]
 		});
 	}

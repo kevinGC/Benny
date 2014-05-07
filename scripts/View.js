@@ -18,12 +18,19 @@ var view = (function() {
 			$("#songList").append(nameElem);
 		},
 
-		setLines: function(english, korean) {
+		setLines: function(english, korean, callbacks) {
 			$("#engLyricsList").empty();
 			$("#korLyricsList").empty();
 			for(var i = 0; i < english.length; i++) {
-				var engLyrics = $("<li>").html(english[i]);
-				var korLyrics = $("<li>").html(korean[i]);
+				// var clickLine = function(x) {
+				// 	return function() { controller.setLineWithTime(x); }
+				// }(times[i]);
+				var engLyrics = $("<li>")
+					.html(english[i])
+					.click(callbacks[i]);
+				var korLyrics = $("<li>")
+					.html(korean[i])
+					.click(callbacks[i]);
 				$("#engLyricsList").append(engLyrics);
 				$("#korLyricsList").append(korLyrics);
 			}
@@ -40,6 +47,10 @@ var view = (function() {
 					.attr("type", "video/mp4"));
 			$("#videoHolder").empty();
 			$("#videoHolder").append(video);
+		},
+
+		seekVideo: function(time) {
+			$("#vid")[0].currentTime = time;
 		},
 
 		setRunLoop: function(cb) {
