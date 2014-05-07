@@ -42,7 +42,7 @@ var view = {
 		$("#korLine").html(korean);
 		$("#metadata").empty();
 		for(var i = 0; i < metadata.length; i++) {
-			var li = $("<li>").html(metadata[i].start + ", " + metadata[i].len
+			var li = $("<li>").html(metadata[i].start + ", " + metadata[i].length
 				+ ", " + metadata[i].info);
 			$("#metadata").append(li);
 		}
