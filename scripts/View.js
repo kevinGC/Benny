@@ -19,20 +19,22 @@ var view = (function() {
 		},
 
 		setLines: function(english, korean, callbacks) {
-			$("#engLyricsList").empty();
-			$("#korLyricsList").empty();
+			// $("#engLyricsList").empty();
+			// $("#korLyricsList").empty();
+			$("#lyrics").empty();
 			for(var i = 0; i < english.length; i++) {
-				// var clickLine = function(x) {
-				// 	return function() { controller.setLineWithTime(x); }
-				// }(times[i]);
-				var engLyrics = $("<li>")
-					.html(english[i])
-					.click(callbacks[i]);
-				var korLyrics = $("<li>")
-					.html(korean[i])
-					.click(callbacks[i]);
-				$("#engLyricsList").append(engLyrics);
-				$("#korLyricsList").append(korLyrics);
+				var row = $("<tr>");
+				row.append($("<td>").html(english[i]))
+				row.append($("<td>").html(korean[i]));
+				$("#lyrics").append(row);
+				// var engLyrics = $("<li>")
+				// 	.html(english[i])
+				// 	.click(callbacks[i]);
+				// var korLyrics = $("<li>")
+				// 	.html(korean[i])
+				// 	.click(callbacks[i]);
+				// $("#engLyricsList").append(engLyrics);
+				// $("#korLyricsList").append(korLyrics);
 			}
 		},
 

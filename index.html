@@ -6,13 +6,16 @@
 </head>
 <body>
 
-<div id="songs">
-	<h2>Songs</h2>
+<div id="songs" class="fullHeight rightBorder">
+	<!-- <h2>Songs</h2> -->
+	<div class="searchBar">
+		<input type="text" name="searchString" placeholder="Song name">
+	</div>
 	<ul id="songList">
 	</ul>
 </div>
 
-<div id="main">
+<div id="main" class="fullHeight rightBorder">
 	<h2>Main View</h2>
 	<div id="videoHolder">
 	</div>
@@ -30,18 +33,22 @@
 	</div>
 </div>
 
-<!-- TODO make this into a table! -->
-<div id="engLyrics">
-	<h2>English Lyrics</h2>
-	<ol id="engLyricsList">
-	</ol>
-</div>
+<div id="lyrics" class="fullHeight rightBorder">
+	<table>
+	</table>
 
-<div id="korLyrics">
-	<h2>Korean Lyrics</h2>
-	<ol id="korLyricsList">
-	</ol>
-</div>
+<!-- TODO make this into a table! -->
+<!-- <div id="engLyrics" class="fullHeight rightBorder"> -->
+	<!-- <h2>English Lyrics</h2> -->
+	<!-- <ol id="engLyricsList"> -->
+	<!-- </ol> -->
+<!-- </div> -->
+
+<!-- <div id="korLyrics" class="fullHeight"> -->
+	<!-- <h2>Korean Lyrics</h2> -->
+	<!-- <ol id="korLyricsList"> -->
+	<!-- </ol> -->
+<!-- </div> -->
 
 
 <script src="scripts/jquery-2.1.1.min.js"></script>

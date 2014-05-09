@@ -1,3 +1,59 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	background: radial-gradient(white, rgb(57, 130, 172));
+	margin: 0px;
+}
+
+div.fullHeight {
+	height: 100%;
+	margin: 0px;
+}
+
+div.rightBorder {
+	border-right: solid;
+	border-width: 1px;
+	border-right-color: gray;
+}
+
+.searchBar  {
+	/*margin-left: auto;*/
+	/*margin-right: auto;*/
+	text-align: center;
+	margin: 20px 0px 20px 0px;
+}
+
+.searchBar > input {
+	border-radius: 25px;
+}
+
+/*Placeholder text. WHY U NO STANDARDIZE?*/
+.searchBar > input::-webkit-input-placeholder {
+   color: gray;
+   text-align: center;
+}
+
+.searchBar > input:-moz-placeholder { /* Firefox 18- */
+   color: gray;  
+   text-align: center;
+}
+
+.searchBar > input::-moz-placeholder {  /* Firefox 19+ */
+   color: gray;  
+   text-align: center;
+}
+
+:-ms-input-placeholder {  
+   color: gray;  
+   text-align: center;
+}
+
+video.center { 
+	margin: 0 auto;
+	width: 640px; }
+
 #songs {
 	float: left;
 	width: 20%;
@@ -8,13 +64,18 @@
 	width: 40%;
 }
 
-#engLyrics {
+#lyrics {
 	float: left;
-	width: 20%;
+	width: 39%;
 }
 
-#korLyrics {
-	float: left;
-	width: 20%;
-}
+/*#engLyrics {*/
+	/*float: left;*/
+	/*width: 20%;*/
+/*}*/
+
+/*#korLyrics {*/
+	/*float: left;*/
+	/*width: 19%;*/
+/*}*/
 
