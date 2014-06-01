@@ -1,17 +1,41 @@
 var view = (function() {
-	var updateLineWithTag = function(english, korean, metadata, id) {
-		$(id + " > h3:nth-child(1)").html(english);
-		$(id + " > h3:nth-child(2)").html(korean);
-		$(id + " > ol").empty();
-		for(var i = 0; i < metadata.length; i++) {
-			var li = $("<li>").html(metadata[i].start + ", " + metadata[i].length
-				+ ", " + metadata[i].info);
-			$(id + " > ol").append(li);
+	var metadata = null;
+
+	var displayMetadata = function(line, index) {
+		var relevant = _(metadata).filter(function(datum) {
+			return datum.start <= index && datum.start + datum.length > index;
+		});
+		$("#info > ul").empty();
+		_(relevant).each(function(datum) {
+			// var chars = line.korean.substr(datum.start, datum.length);
+			var a = $("<a>")
+				.html(datum.info)
+				.attr("href", datum.link)
+				.attr("target", "_blank");
+			var li = $("<li>").append(a);
+			$("#info > ul").append(li);
+		});
+	}
+
+	// TODO need c?
+	var getSmartChar = function(line, index) { // huehuehue
+		return $("<span>")
+			.html(line.korean[index])
+			.mouseover(_.partial(displayMetadata, line, index));
+	};
+
+	var updateLineWithTag = function(line, id) {
+		var koreanSpans = [];
+		for(var i = 0; i < line.korean.length; i++) {
+			koreanSpans.push(getSmartChar(line, i));
 		}
+		$(id + " > div#korean-scroll > p").html(koreanSpans);
+		$(id + " > div#english-scroll > p").html(line.english);
+		metadata = line.metadata;
 	};
 
 	return {
-		addSong: function(songName, cb) {
+		addSong: function(songName, cb ){
 			var nameElem = $("<li>")
 				.html(songName)
 				.click(cb);
@@ -19,22 +43,12 @@ var view = (function() {
 		},
 
 		setLines: function(english, korean, callbacks) {
-			// $("#engLyricsList").empty();
-			// $("#korLyricsList").empty();
-			$("#lyrics").empty();
+			$("#lyrics > table").empty();
 			for(var i = 0; i < english.length; i++) {
 				var row = $("<tr>");
-				row.append($("<td>").html(english[i]))
-				row.append($("<td>").html(korean[i]));
-				$("#lyrics").append(row);
-				// var engLyrics = $("<li>")
-				// 	.html(english[i])
-				// 	.click(callbacks[i]);
-				// var korLyrics = $("<li>")
-				// 	.html(korean[i])
-				// 	.click(callbacks[i]);
-				// $("#engLyricsList").append(engLyrics);
-				// $("#korLyricsList").append(korLyrics);
+				row.append($("<td>").html(english[i]).click(callbacks[i]));
+				row.append($("<td>").html(korean[i]).click(callbacks[i]));
+				$("#lyrics > table").append(row);
 			}
 		},
 
@@ -46,9 +60,10 @@ var view = (function() {
 				.attr("id", "vid")
 				.append($("<source>")
 					.attr("src", "res/video/Genie.mp4")
-					.attr("type", "video/mp4"));
-			$("#videoHolder").empty();
-			$("#videoHolder").append(video);
+					.attr("type", "video/mp4"))
+					.attr("controls", "");
+			$("#video-holder").empty();
+			$("#video-holder").append(video);
 		},
 
 		seekVideo: function(time) {
@@ -57,17 +72,13 @@ var view = (function() {
 
 		setRunLoop: function(cb) {
 			$("#vid").on("timeupdate", function() {
-				controller.setLineWithTime($("#vid")[0].currentTime);
+				cb($("#vid")[0].currentTime);
 			});
 		},
 
 		// TODO naming. These should be updates, Controller should be set
-		updateLine: function(english, korean, metadata) {
-			updateLineWithTag(english, korean, metadata, "#currentLine");
+		updateLine: function(line) {
+			updateLineWithTag(line, "#scroller");
 		},
-
-		updateNextLine: function(english, korean, metadata) {
-			updateLineWithTag(english, korean, metadata, "#nextLine");
-		}
 	};
 })();

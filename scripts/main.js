@@ -3,13 +3,7 @@
 $(function() {
 	console.log("안녕, 월드");
 
-	// set up song list
-	var songNames = SongManager.getSongNames();
-	for(var i = 0; i < songNames.length; i++) {
-		var loadSongHelper = function(x) { 
-			return function() { controller.loadSong(songNames[x]); };
-		};
-		view.addSong(songNames[i], loadSongHelper(i));
-	}
+	// load song
+	controller.loadSong(Utility.parseArgs().song);
 });
 

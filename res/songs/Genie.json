@@ -1,4 +1,6 @@
 {
+  "name": "Genie",
+  "duration": 212,
   "lines": [
     {
       "english": "Tell me your wish",
@@ -6,24 +8,28 @@
       "startTime": 9.5,
       "metadata": [
         {
-          "start": "0",
-          "length": "2",
-          "info": "wish"
+          "start": 0,
+          "length": 2,
+          "info": "소월: wish",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=소원"
         },
         {
-          "start": "2",
-          "length": "1",
-          "info": "object particle"
+          "start": 2,
+          "length": 1,
+          "info": "object particle",
+          "link": "http://www.talktomeinkorean.com/lessons/level-2-lesson-2-%EC%9D%84-%EB%A5%BC-object-marking-particles/"
         },
         {
-          "start": "4",
-          "length": "2",
-          "info": "to say/talk"
+          "start": 4,
+          "length": 2,
+          "info": "말하다: to say/talk",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=말하다"
         },
         {
-          "start": "5",
-          "length": "2",
-          "info": "grammar: to try"
+          "start": 5,
+          "length": 2,
+          "info": "grammar: to try",
+          "link": "http://www.talktomeinkorean.com/lessons/level-4-lesson-12/"
         }
       ]
     },
@@ -33,59 +39,70 @@
       "startTime": 12,
       "metadata": [
         {
-          "start": "0",
-          "length": "1",
-          "info": "informal you"
+          "start": 0,
+          "length": 1,
+          "info": "니: informal you",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=니"
         },
         {
-          "start": "2",
-          "length": "3",
-          "info": "one's mind/heart"
+          "start": 2,
+          "length": 3,
+          "info": "마음속: one's mind/heart",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=마음속"
         },
         {
-          "start": "5",
-          "length": "1",
-          "info": "grammar: in"
+          "start": 5,
+          "length": 1,
+          "info": "grammar: in",
+          "link": "http://www.talktomeinkorean.com/lessons/l1l18/"
         },
         {
-          "start": "7",
-          "length": "1",
-          "info": "to have"
+          "start": 7,
+          "length": 1,
+          "info": "있다: to have",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=있다"
         },
         {
-          "start": "8",
-          "length": "1",
-          "info": "grammar: verb to adj mod"
+          "start": 8,
+          "length": 1,
+          "info": "grammar: verb to adj mod",
+          "link": "http://www.talktomeinkorean.com/lessons/level-3-lesson-14/"
         },
         {
-          "start": "10",
-          "length": "1",
-          "info": "to be small"
+          "start": 10,
+          "length": 1,
+          "info": "작다: to be small",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=작다"
         },
         {
-          "start": "11",
-          "length": "1",
-          "info": "grammar: vert to adj mod"
+          "start": 11,
+          "length": 1,
+          "info": "grammar: vert to adj mod",
+          "link": "http://www.talktomeinkorean.com/lessons/level-3-lesson-14/"
         },
         {
-          "start": "13",
-          "length": "1",
-          "info": "dream"
+          "start": 13,
+          "length": 1,
+          "info": "꿈: dream",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=꿈"
         },
         {
-          "start": "14",
-          "length": "1",
-          "info": "object particle"
+          "start": 14,
+          "length": 1,
+          "info": "object particle",
+          "link": "http://www.talktomeinkorean.com/lessons/level-2-lesson-2-%EC%9D%84-%EB%A5%BC-object-marking-particles/"
         },
         {
-          "start": "15",
-          "length": "2",
-          "info": "to say/talk"
+          "start": 15,
+          "length": 2,
+          "info": "말하다: to say/talk",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=말하다"
         },
         {
-          "start": "16",
-          "length": "2",
-          "info": "grammar: to try"
+          "start": 16,
+          "length": 2,
+          "info": "grammar: to try",
+          "link": "http://www.talktomeinkorean.com/lessons/level-4-lesson-12/"
         }
       ]
     },
@@ -95,49 +112,58 @@
       "startTime": 16,
       "metadata": [
         {
-          "start": "0",
-          "length": "1",
-          "info": "you"
+          "start": 0,
+          "length": 1,
+          "info": "니: you",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=니"
         },
         {
-          "start": "2",
-          "length": "2",
-          "info": "head/mind"
+          "start": 2,
+          "length": 2,
+          "info": "머리: head/mind",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=머리"
         },
         {
-          "start": "4",
-          "length": "1",
-          "info": "in"
+          "start": 4,
+          "length": 1,
+          "info": "in",
+          "link": "http://www.talktomeinkorean.com/lessons/l1l18/"
         },
         {
-          "start": "5",
-          "length": "1",
-          "info": "to have"
+          "start": 5,
+          "length": 1,
+          "info": "있다: to have",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=있다"
         },
         {
-          "start": "6",
-          "length": "1",
-          "info": "verb to adj mod"
+          "start": 6,
+          "length": 1,
+          "info": "verb to adj mod",
+          "link": "http://www.talktomeinkorean.com/lessons/level-3-lesson-14/"
         },
         {
-          "start": "8",
-          "length": "3",
-          "info": "ideal type"
+          "start": 8,
+          "length": 3,
+          "info": "이상형: ideal type",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=이상형"
         },
         {
-          "start": "11",
-          "length": "1",
-          "info": "object particle"
+          "start": 11,
+          "length": 1,
+          "info": "object particle",
+          "link": "http://www.talktomeinkorean.com/lessons/level-2-lesson-2-%EC%9D%84-%EB%A5%BC-object-marking-particles/"
         },
         {
-          "start": "13",
-          "length": "2",
-          "info": "to draw"
+          "start": 13,
+          "length": 2,
+          "info": "그리다: to draw",
+          "link": "http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=그리다"
         },
         {
-          "start": "14",
-          "length": "2",
-          "info": "grammar: to try"
+          "start": 14,
+          "length": 2,
+          "info": "grammar: to try",
+          "link": "http://www.talktomeinkorean.com/lessons/level-4-lesson-12/"
         }
       ]
     },

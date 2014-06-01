@@ -6,52 +6,53 @@
 </head>
 <body>
 
-<div id="songs" class="fullHeight rightBorder">
-	<!-- <h2>Songs</h2> -->
-	<div class="searchBar">
-		<input type="text" name="searchString" placeholder="Song name">
+<header>
+	<nav>
+		<ul>
+			<li><a href="index.html?song=Genie">Choose Song</a></li>
+			<li><a href="create.html">Create Song</a></li>
+			<li><a href="about.html">About</a></li>
+			<li><a href="https://github.com/kevinGC/Benny">Source</a></li>
+		</ul>
+	</nav>
+</header>
+
+<div id="main" class="left-pane">
+	<div id="video-holder" class="center">
 	</div>
-	<ul id="songList">
-	</ul>
+
+	<span id="scroller">
+		<div id="korean-scroll" class="lyrics-scroll">
+			<p>
+			</p>
+		</div>
+		<div id="english-scroll" class="lyrics-scroll">
+			<p>
+			</p>
+		</div>
+	</span>
+
+	<!-- grammar info -->
+	<span id="info" class="lyrics-scroll">
+		<ul>
+		</ul>
+	</span>
+
 </div>
 
-<div id="main" class="fullHeight rightBorder">
-	<h2>Main View</h2>
-	<div id="videoHolder">
-	</div>
-	<div id="currentLine">
-		<h3></h3>
-		<h3></h3>
-		<ol>
-		</ol>
-	</div>
-	<div id="nextLine">
-		<h3></h3>
-		<h3></h3>
-		<ol>
-		</ol>
-	</div>
-</div>
-
-<div id="lyrics" class="fullHeight rightBorder">
+<div id="lyrics" class="right-pane">
 	<table>
 	</table>
+</div>
 
-<!-- TODO make this into a table! -->
-<!-- <div id="engLyrics" class="fullHeight rightBorder"> -->
-	<!-- <h2>English Lyrics</h2> -->
-	<!-- <ol id="engLyricsList"> -->
-	<!-- </ol> -->
-<!-- </div> -->
-
-<!-- <div id="korLyrics" class="fullHeight"> -->
-	<!-- <h2>Korean Lyrics</h2> -->
-	<!-- <ol id="korLyricsList"> -->
-	<!-- </ol> -->
-<!-- </div> -->
+<footer>sldfkj</footer>
 
 
 <script src="scripts/jquery-2.1.1.min.js"></script>
+<script src="scripts/underscore.js"></script>
+
+<script src="scripts/Utility.js"></script>
+<script src="scripts/SongModel.js"></script>
 <script src="scripts/SongManager.js"></script>
 <script src="scripts/View.js"></script>
 <script src="scripts/Controller.js"></script>
