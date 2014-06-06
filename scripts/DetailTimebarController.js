@@ -1,7 +1,14 @@
 var detailTimebarController = (function() {
+	// has to be its own function up here to prevent capturing i
+	var modifyStartTime = function(lineNum) {
+		return function() {
+			songModel.setStartTime(lineNum, $(this).val());
+		}
+	};
 
 	return {
-		updateLines: function(lines, sliceStart, sliceDuration) {
+		// TODO weird args
+		updateLines: function(lines, sliceStart, sliceDuration, firstLineNum) {
 			var rangeList = $("#detail-timebar > ul");
 			rangeList.empty();
 			for(var i = 0; i < lines.length; i++) {
@@ -11,7 +18,9 @@ var detailTimebarController = (function() {
 					.attr("type", "range")
 					.attr("min", sliceStart)
 					.attr("max", sliceStart + sliceDuration)
-					.attr("value", lines[i].startTime);
+					.attr("step", 0.05)
+					.attr("value", lines[i].startTime)
+					.on("change", modifyStartTime(firstLineNum + i));
 				var li = $("<li>")
 					.append(eng)
 					.append(kor)

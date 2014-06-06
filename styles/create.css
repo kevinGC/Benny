@@ -1,0 +1,24 @@
+#detail-timebar input {
+	width: 100%;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#detail-timebar li {
+	line-height: 5px;
+}
+
+#video-container {
+	height: 350px;
+	width: 900px;
+}
+
+#video-container>video {
+	float: right;
+}
+
+#current-lyrics {
+	float: left;
+	width: 200px;
+}

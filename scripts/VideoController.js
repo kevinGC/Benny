@@ -2,6 +2,7 @@ var videoController = (function() {
 	var _video;
 
 	return {
+		// TODO fix generic names
 		updateVideo: function(name) {
 			_video = $("<video>")
 				.css("width", "640px")
@@ -11,12 +12,16 @@ var videoController = (function() {
 					.attr("src", "res/video/" + name + ".mp4")
 					.attr("type", "video/mp4"))
 					.attr("controls", "")[0];
-			$("#video-container").empty();
+			// $("#video-container").empty();
 			$("#video-container").append(_video);
 		},
 
-		seekVideo: function() {
+		seek: function(time) {
 			_video.currentTime = time;
+		},
+
+		getTime: function() {
+			return _video.currentTime;
 		}
 	};
 })();

@@ -101,17 +101,17 @@ div#korean-scroll {
 
 /* lyrics stuff */
 
-div#lyrics {
-	font-size: 10px;
-}
+/*div#lyrics {*/
+	/*font-size: 10px;*/
+/*}*/
 
-div#lyrics > table {
+/*div#lyrics > table {*/
 	/*font-weight: bold;*/
-	margin-left: 20px;
-	margin-right: 20px;
-}
+	/*margin-left: 20px;*/
+	/*margin-right: 20px;*/
+/*}*/
 
 /* TODO idiomatic class names (- dashes) */
-div.current-lyric {
+/*div.current-lyric {*/
 	/*background-color: red;*/
-}
+/*}*/

@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <link rel="stylesheet" href="styles/main.css" type="text/css">
 <link rel="stylesheet" href="styles/twoPane.css" type="text/css">
+<link rel="stylesheet" href="styles/create.css" type="text/css">
 <link rel="stylesheet" href="styles/iThing.css" type="text/css" />
 
 </head>
@@ -21,15 +22,16 @@
 	</nav>
 	<div id="save-load-bar">
 		<ul>
-			<li><button>Save</button></li>
-			<li><button>Upload lyrics file</button></li>
-			<li><button>Upload Benny file</button></li>
+			<li><button id="save">Save</button></li>
+			<li><button id="upload-lyrics">Upload lyrics file</button></li>
+			<li><button id="upload-benny">Upload Benny file</button></li>
 		</ul>
 	</div>
 </header>
 
 <div class="left-pane">
 	<div id="video-container">
+		<div id="current-lyrics"></div>
 	</div>
 	<div id="timebars-container">
 		<div id="timebar"></div>
@@ -38,7 +40,10 @@
 			</ul>
 		</div>
 	</div>
-	<div id="line-data">LINE DATA GOES HERE SON</div>
+	<div id="line-data">
+		<form>
+		</form>
+	</div>
 </div>
 
 <div id="lyrics" class="right-pane">
@@ -58,6 +63,8 @@
 <script src="scripts/TimebarController.js"></script>
 <script src="scripts/DetailTimebarController.js"></script>
 <script src="scripts/VideoController.js"></script>
+<script src="scripts/LineDataController.js"></script>
+<script src="scripts/SaveLoadController.js"></script>
 
 <script>
 $(function() {
@@ -65,7 +72,13 @@ $(function() {
 
 	// set up our model
 	var songName = Utility.parseArgs().song;
-	songModel.init(songName, SongManager.getSong(songName));
+	if(songName) {
+		window.songModel = new SongModel(SongManager.getSong(songName));
+		// TODO this shouldn't be here and in SaveLoadController
+		setInterval(function() { 
+			songModel.setTime(videoController.getTime());
+		}, 50);
+	}
 });
 </script>
 
