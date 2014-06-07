@@ -6,6 +6,8 @@ var SongModel = function(songData) {
 	this._sliceDuration = 10;
 	this._song;
 	this._currentLine;
+	// TODO should just be first line
+	this._linesInSlice = [];
 
 	if(typeof songData === 'object') {
 		this._init(songData);
@@ -54,23 +56,19 @@ SongModel.prototype._getLyricsData = function() {
 };
 
 // awkward return value
-SongModel.prototype._getLinesInSlice = function() {
-	var linesInSlice = [];
+// TODO just set the private ivar, now that we have one
+// TODO also just aesthetically ugly. Giant conditional
+SongModel.prototype._setLinesInSlice = function() {
+	this._linesInSlice = [];
 	var firstLineNum;
 	for(var i = 0; i < this._song.lines.length; i++) {
 		if(this._sliceStart <= this._song.lines[i].startTime
 			&& this._song.lines[i].startTime <= this._sliceStart + this._sliceDuration) {
-			linesInSlice.push(this._song.lines[i]);
-			if(firstLineNum === undefined) {
-				firstLineNum = i;
-			}
+			this._linesInSlice.push(i);
 		}
 	}
-	return {
-		lines: linesInSlice,
-		firstLineNum: firstLineNum
-	};
 };
+
 // TODO rename init functions
 // TODO song should really contain the name
 SongModel.prototype._init = function(song) {
@@ -106,7 +104,7 @@ SongModel.prototype.setTime = function(time) {
 
 SongModel.prototype.setTimeAndSeek = function(time) {
 	this._time
-}
+};
 
 SongModel.prototype.getLines = function() {
 	return this._song.lines.slice();
@@ -122,14 +120,29 @@ SongModel.prototype.seek = function(time) {
 	this._sliceStart = this._time;
 	videoController.seek(this._time)
 	// TODO redundancy
-	var linesInSlice = this._getLinesInSlice();
-	detailTimebarController.updateLines(linesInSlice.lines
-		, this._sliceStart, this._sliceDuration, linesInSlice.firstLineNum);
+	this._setLinesInSlice();
+	var self = this;
+	var linesInSlice = _(this._linesInSlice).map(function(lineNum) {
+		return self._song.lines[lineNum];
+	});
+	detailTimebarController.updateLines(linesInSlice
+		, this._sliceStart, this._sliceDuration);
 
 };
 
-SongModel.prototype.setStartTime = function(lineNum, startTime) {
-	this._song.lines[lineNum].startTime = startTime;
+// SongModel.prototype.setStartTime = function(lineNum, startTime) {
+// 	this._song.lines[lineNum].startTime = startTime;
+// };
+
+// passed an array of values that represent how far along the time slice each
+// line occurs
+SongModel.prototype.setStartTimes = function(ranges) {
+	var total = 0;
+	for(var i = 0; i < ranges.length; i++) {
+		total += ranges[i];
+		this._song.lines[i + this._linesInSlice[0]].startTime 
+			= total * this._sliceDuration + this._sliceStart; 
+	}
 };
 
 SongModel.prototype.getJSON = function() {
@@ -150,8 +163,10 @@ SongModel.prototype._viewSongStrategy.prototype.run = function() {
 	}
 };
 
+// TODO oh god the redundancy is awful
 SongModel.prototype._createSongStrategy = function(songModel) {
 	this._songModel = songModel;
+	this._songModel._setLinesInSlice();
 	lyricsController.updateLyrics(songModel._getLyricsData());
 	videoController.updateVideo(songModel._song.name);
 	timebarController.init(songModel._sliceDuration, songModel._song.duration);
@@ -165,20 +180,25 @@ SongModel.prototype._createSongStrategy.prototype.run = function() {
 		this._songModel._currentLine = newLine;
 		lineDataController.updateLine(this._songModel._currentLine);
 	}
-	if(this._songModel._time < this._songModel._sliceStart
+	// TODO the + 0.005 prevents strange skipping behavior. Find a better solution!
+	if(this._songModel._time + 0.005 < this._songModel._sliceStart
 		|| this._songModel._time > this._songModel._sliceStart + this._songModel._sliceDuration) {
 		this.updateTimeSlice();
 	}
 };
 
+// TODO serious code repetition here!
 SongModel.prototype._createSongStrategy.prototype.updateTimeSlice = function() {
 	this._songModel._sliceStart = this._songModel._time;
 	timebarController.updateTime(this._songModel._time - this._songModel._sliceDuration / 2
 		, this._songModel._sliceDuration);
-	var linesInSlice = this._songModel._getLinesInSlice();
-	detailTimebarController.updateLines(linesInSlice.lines
+	this._songModel._setLinesInSlice();
+	var self = this;
+	var linesInSlice = _(this._songModel._linesInSlice).map(function(lineNum) {
+		return self._songModel._song.lines[lineNum];
+	});
+	detailTimebarController.updateLines(linesInSlice
 		, this._songModel._sliceStart
-		, this._songModel._sliceDuration
-		, linesInSlice.firstLineNum);
+		, this._songModel._sliceDuration);
 };
 
