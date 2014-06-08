@@ -6,6 +6,7 @@ var SongModel = function(songData) {
 	this._sliceDuration = 10;
 	this._song;
 	this._currentLine;
+	this._currentLineNum;
 	// TODO should just be first line
 	this._linesInSlice = [];
 
@@ -19,12 +20,17 @@ var SongModel = function(songData) {
 	this._strategy = new this._createSongStrategy(this);
 };
 
-SongModel.prototype._getCurrentLine = function() {
+SongModel.prototype._setCurrentLine = function() {
 	for(var i = this._song.lines.length - 1; i >= 0; i--) {
-		if(this._song.lines[i].startTime < this._time)
-			return this._song.lines[i];
+		if(this._song.lines[i].startTime < this._time || i == 0) {
+			if(this._currentLineNum !== i) {
+				this._currentLineNum = i;
+				this._currentLine = this._song.lines[i];
+				return true;
+			} else
+				return false;
+		}
 	}
-	return this._song.lines[0];
 };
 
 // get data formatted appropriately for lyricsController
@@ -149,6 +155,21 @@ SongModel.prototype.getJSON = function() {
 	return JSON.stringify(this._song);
 };
 
+SongModel.prototype.addMetadata = function(lineNum) {
+	this._song.lines[lineNum].metadata.push({
+		start : 0,
+		length: 0,
+		info  : '',
+		link  : ''
+	});
+	lineDataController.updateLine(songModel._currentLine
+		, songModel._currentLineNum);
+};
+
+SongModel.prototype.removeMetadata = function(lineNum, index) {
+	this._song.lines[lineNum].metadata.splice(index, 1);
+};
+
 // strategies dictating how SongModel updates the world
 
 SongModel.prototype._viewSongStrategy = function(songModel) {
@@ -157,9 +178,8 @@ SongModel.prototype._viewSongStrategy = function(songModel) {
 };
 
 SongModel.prototype._viewSongStrategy.prototype.run = function() {
-	var line = getCurrentLine();
-	if(line !== null) {
-		view.updateLine(line);
+	if(this._currentLine !== null) {
+		view.updateLine(this._currentLine);
 	}
 };
 
@@ -167,18 +187,20 @@ SongModel.prototype._viewSongStrategy.prototype.run = function() {
 SongModel.prototype._createSongStrategy = function(songModel) {
 	this._songModel = songModel;
 	this._songModel._setLinesInSlice();
+	this._songModel._setCurrentLine();
 	lyricsController.updateLyrics(songModel._getLyricsData());
 	videoController.updateVideo(songModel._song.name);
 	timebarController.init(songModel._sliceDuration, songModel._song.duration);
-	lineDataController.updateLine(songModel._getCurrentLine());
+	lineDataController.updateLine(songModel._currentLine
+		, songModel._currentLineNum);
 	this.updateTimeSlice();
 };
 
 SongModel.prototype._createSongStrategy.prototype.run = function() {
-	var newLine = this._songModel._getCurrentLine();
-	if(newLine !== this._songModel._currentLine) {
-		this._songModel._currentLine = newLine;
-		lineDataController.updateLine(this._songModel._currentLine);
+	var lineDidChange = this._songModel._setCurrentLine();
+	if(lineDidChange) {
+		lineDataController.updateLine(this._songModel._currentLine
+			, this._songModel._currentLineNum);
 	}
 	// TODO the + 0.005 prevents strange skipping behavior. Find a better solution!
 	if(this._songModel._time + 0.005 < this._songModel._sliceStart

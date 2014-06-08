@@ -1,31 +1,48 @@
 var lineDataController = (function() {
 	var dataForm = $("#line-data > form");
+	var curLineNum; // priv ivar prevents having to awkwardly pass around
+
+	// helper func that returns appropriate HTML input given metadata info
+	var buildMetadataInput = function(datum, index) {
+		var datumElem = $("<div>");
+		for(var prop in datum) {
+			var input = $("<label>").html(prop)
+				.append($("<input>")
+					.attr("type", "text")
+					.attr("value", datum[prop]));
+			datumElem.append(input);
+		}
+
+		datumElem.append($("<button>")
+			.html("Remove")
+			.click(function() {
+				datumElem.remove();
+				songModel.removeMetadata(curLineNum, index);
+			}));
+		return datumElem;
+	};
+
+	var addMetadata = function() {
+		songModel.addMetadata(curLineNum);
+	};
 
 	return {
-		updateLine: function(line) {
+		updateLine: function(line, lineNum) {
 			if(!line) // possible there's no current line
 				return;
 
+			curLineNum = lineNum;
 			dataForm.empty();
-			// dataForm.append("<p>" + line.english + "</p>");
-			// dataForm.append("<p>" + line.korean + "</p>");
 			$("#current-lyrics").empty();
 			$("#current-lyrics").append("<p>" + line.english + "</p>");
 			$("#current-lyrics").append("<p>" + line.korean + "</p>");
-			var metadataInputs = _(line.metadata).map(function(datum) {
-				var datumElem = $("<div>");
-				for(var prop in datum) {
-					var input = $("<label>").html(prop)
-						.append($("<input>")
-							.attr("type", "text")
-							.attr("value", datum[prop]));
-					datumElem.append(input);
-				}
-				return datumElem;
-			});
-			for(var i = 0; i < metadataInputs.length; i++) {
-				dataForm.append(metadataInputs[i]);
-			}
+			var metadataInputs = _(line.metadata).map(buildMetadataInput);
+			_(metadataInputs).each(function(inputs) { dataForm.append(inputs); });
+			var addMetaButton = $("<button>")
+				.html("Add metadata")
+				.attr("type", "button")
+				.click(addMetadata);
+			dataForm.append(addMetaButton);
 		}
 	};
 })();

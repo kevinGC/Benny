@@ -1,3 +1,8 @@
+#save-load-bar li {
+	float: left;
+	list-style-type: none;
+}
+
 #detail-timebar input {
 	width: 900px;
 	border: 0;
@@ -10,7 +15,7 @@
 }
 
 #detail-timebar {
-	padding: 20px 0 100px 0;
+	padding: 20px 0 40px 0;
 }
 
 #video-container {
