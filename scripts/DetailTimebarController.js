@@ -18,8 +18,7 @@ var detailTimebarController = (function() {
 
 	var seeker = $("#detail-timebar-seeker");
 	seeker.click(function(e) {
-		debugger;
-		var pctOffset = (e.pageX - seeker.offset().x) / seeker.width();
+		var pctOffset = (e.pageX - seeker.offset().left) / seeker.width();
 		songModel.seekInSlice(pctOffset);
 	});
 

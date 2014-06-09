@@ -4,16 +4,16 @@ var songModel = function(songData) {
 
 	// PRIVATE
 	var song;
-	var currentLine;
-	var currentLineNum;
-	var linesInSlice  = []; // TODO should just be first line
-	var time          = 0;
-	var sliceStart    = 0;
-	var sliceDuration = 10;
+	var currentLine    = '';
+	var currentLineNum = -1;
+	var linesInSlice   = []; // TODO should just be first line
+	var time           = 0;
+	var sliceStart     = 0;
+	var sliceDuration  = 10;
 
 	var setCurrentLine = function() {
 		for(var i = song.lines.length - 1; i >= 0; i--) {
-			if(song.lines[i].startTime < time || i == 0) {
+			if(song.lines[i].startTime < time) {
 				if(currentLineNum !== i) {
 					currentLineNum = i;
 					currentLine = song.lines[i];
@@ -22,6 +22,9 @@ var songModel = function(songData) {
 					return false;
 			}
 		}
+		currentLineNum = -1;
+		currentLine    = null;
+		return true;
 	};
 
 	// get data formatted appropriately for lyricsController
@@ -171,24 +174,27 @@ var songModel = function(songData) {
 	that.seek = seek;
 
 	var seekInSlice = function(pctOffset) {
-
-	}
+		videoController.seek(sliceStart + pctOffset * sliceDuration);
+	};
 	that.seekInSlice = seekInSlice;
 
 	var setStartTime = function(lineNum, startTime) {
 		song.lines[lineNum].startTime = startTime;
-	}
+	};
 	that.setStartTime = setStartTime;
 
 	// passed an array of values that represent how far along the time slice each
 	// line occurs
 	var setStartTimes = function(ranges) {
 		var total = 0;
+		var updatedTimes = [];
 		for(var i = 0; i < ranges.length; i++) {
 			total += ranges[i];
-			song.lines[i + linesInSlice[0]].startTime 
-				= total * sliceDuration + sliceStart; 
+			var updatedTime = total * sliceDuration + sliceStart;
+			updatedTimes.push(updatedTime);
+			song.lines[i + linesInSlice[0]].startTime = updatedTime;
 		}
+		lyricsController.updateTimes(linesInSlice[0], updatedTimes);
 	};
 	that.setStartTimes = setStartTimes;
 

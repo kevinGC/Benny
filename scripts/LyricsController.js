@@ -26,6 +26,13 @@ var lyricsController = (function() {
 				row.append($("<td>").html(korean[i]).click(callbacks[i]));
 				$("#lyrics > table").append(row);
 			}
+		},
+
+		updateTimes: function(firstLine, updatedTimes) {
+			var times = $("#lyrics input");
+			_(updatedTimes).each(function(time, index) {
+				times.eq(firstLine + index).val(time);
+			});
 		}
 	};
 })();
