@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/styles/main.css" type="text/css">
+<link rel="stylesheet" href="/static/styles/twoPane.css" type="text/css">
+<link rel="stylesheet" href="/static/styles/create.css" type="text/css">
+<link rel="stylesheet" href="/static/styles/iThing.css" type="text/css" />
+
+</head>
+<body>
+
+<header>
+	<nav>
+		<ul>
+			<li><a href="index.html?song=Genie">Choose Song</a></li>
+			<li><a href="create.html">Create Song</a></li>
+			<li><a href="about.html">About</a></li>
+			<li><a href="https://github.com/kevinGC/Benny">Source</a></li>
+		</ul>
+	</nav>
+	<div id="save-load-bar">
+		<ul>
+			<li><button id="save">Save</button></li>
+			<li><button id="upload-lyrics">Upload lyrics file</button></li>
+			<li><button id="upload-benny">Upload Benny file</button></li>
+		</ul>
+	</div>
+</header>
+
+<div class="left-pane">
+	<div id="video-container">
+		<div id="current-lyrics"></div>
+	</div>
+
+	<div id="timebars-container">
+		<div id="timebar"></div>
+		<div id="detail-timebar">
+			<div id="detail-timebar-seeker">
+				<div id="time-marker"></div>
+			</div>
+			<table id="range" width="100%" cellspacing="0" cellpadding="0">
+				<tr>
+				</tr>
+			</table>	
+		</div>
+	</div>
+
+	<div id="line-data">
+		<form>
+		</form>
+	</div>
+
+		
+</div>
+
+<div id="lyrics" class="right-pane">
+	<table>
+	</table>
+</div>
+
+<script src="/static/scripts/jquery-2.1.1.min.js"></script>
+<script src="/static/scripts/jquery-ui-1.10.4.min.js"></script>
+<script src="/static/scripts/jQRangeSlider-min.js"></script>
+<script src="/static/scripts/colResizable-1.3.source.js"></script>
+<script src="/static/scripts/underscore.js"></script>
+
+<script src="/static/scripts/Utility.js"></script>
+<script src="/static/scripts/SongModel.js"></script>
+<script src="/static/scripts/SongManager.js"></script>
+<script src="/static/scripts/LyricsController.js"></script>
+<script src="/static/scripts/TimebarController.js"></script>
+<script src="/static/scripts/DetailTimebarController.js"></script>
+<script src="/static/scripts/VideoController.js"></script>
+<script src="/static/scripts/LineDataController.js"></script>
+<script src="/static/scripts/SaveLoadController.js"></script>
+
+<script>
+$(function() {
+	console.log("AYOGG");
+
+	// set up the model
+	debugger;
+	window.songModel = songModel(JSON.parse({{ song }}));
+	// TODO this shouldn't be here and in SaveLoadController
+	setInterval(function() { 
+		songModel.setTime(videoController.getTime());
+	}, 50);
+});
+</script>
+
+</body>
+</html>

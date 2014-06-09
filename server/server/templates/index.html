@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="static/styles/main.css">
+</head>
+<body>
+
+<header>
+	<nav>
+		<ul>
+			<li><a href="index.html?song=Genie">Choose Song</a></li>
+			<li><a href="create.html">Create Song</a></li>
+			<li><a href="about.html">About</a></li>
+			<li><a href="https://github.com/kevinGC/Benny">Source</a></li>
+		</ul>
+	</nav>
+</header>
+
+<ul>
+{% for song in songs %}
+	<li>
+		<p>{{ song }}</p>
+		<a href="/view/{{ song }}">View</a>
+		<a href="/edit/{{ song }}">Edit</a>
+	</li>
+{% endfor %}
+</ul>
+
+<script src="scripts/jquery-2.1.1.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+#save-load-bar li {
+	float: left;
+	list-style-type: none;
+}
+
+#detail-timebar input {
+	width: 900px;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#detail-timebar li {
+	line-height: 5px;
+}
+
+#detail-timebar {
+	padding: 20px 0 40px 0;
+}
+
+#video-container {
+	height: 350px;
+	width: 900px;
+}
+
+#video-container>video {
+	float: right;
+}
+
+#current-lyrics {
+	float: left;
+	width: 200px;
+}
+
+/* colResizable */
+#range{
+	border:none;
+	height:37px;
+	width: 900px;
+}
+
+#detail-timebar-seeker {
+	position: absolute;
+	width: 900px;
+	height: 30px;
+}
+
+#detail-timebar:before{
+	display:block;
+	background-image: url('../res/img/rangeBar.png');	
+	background-position:0px 10px;
+	background-repeat: repeat-x;
+	margin-left:9px;
+	/*TODO why isn't think working?*/
+	width:900px;
+	height:30px;
+	position:relative;
+	position:absolute;
+	content:""
+}
+
+#range td{
+	border:none;
+}
+
+.rangeGrip{
+	width:10px;
+	height:19px;
+	cursor:e-resize;
+	background-image: url('../res/img/slider.png');
+	z-index:8;
+}
+
+
+.rangeDrag .rangeGrip, .rangeGrip:hover{
+	background-position:right;
+}
+
+#text{
+	color:#034a92;
+	float:right;
+}
+
+#lyrics input {
+	width: 40px;
+}
+
+
