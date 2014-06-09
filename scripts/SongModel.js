@@ -27,13 +27,15 @@ var songModel = function(songData) {
 	// get data formatted appropriately for lyricsController
 	var getLyricsData = function() {
 		// add lyrics
-		var engLines  = [];
-		var korLines  = [];
-		var callbacks = [];
+		var engLines   = [];
+		var korLines   = [];
+		var callbacks  = [];
+		var startTimes = [];
 
 		for(var i = 0; i < song.lines.length; i++) {
 			engLines.push(song.lines[i].english);
 			korLines.push(song.lines[i].korean);
+			startTimes.push(song.lines[i].startTime);
 			callbacks.push((function(x) { 
 				return function() {
 					// view.seekVideo(this._song.lines[x].startTime)
@@ -42,9 +44,10 @@ var songModel = function(songData) {
 			})(i));
 		}
 		return {
-			english: engLines,
-			korean: korLines,
-			callbacks: callbacks
+			english   : engLines,
+			korean    : korLines,
+			callbacks : callbacks,
+			startTimes: startTimes
 		};
 	};
 
@@ -70,11 +73,12 @@ var songModel = function(songData) {
 		}
 		// create _song's 'lines' attribute
 		dataLines.splice(0, 2);
-		var timePerLyric = song.duration / dataLines.length;
-		for(var i = 0; i < dataLines.length / 2; i++) {
+		var numLines = dataLines.length / 2;
+		var timePerLyric = song.duration / numLines;
+		for(var i = 0; i < numLines; i++) {
 			song.lines.push({
 				english  : dataLines[i],
-				korean   : dataLines[i + dataLines.length / 2],
+				korean   : dataLines[i + numLines],
 				startTime: i * timePerLyric,
 				metadata : []
 			});
@@ -165,6 +169,16 @@ var songModel = function(songData) {
 		strategy.onSeek();
 	};
 	that.seek = seek;
+
+	var seekInSlice = function(pctOffset) {
+
+	}
+	that.seekInSlice = seekInSlice;
+
+	var setStartTime = function(lineNum, startTime) {
+		song.lines[lineNum].startTime = startTime;
+	}
+	that.setStartTime = setStartTime;
 
 	// passed an array of values that represent how far along the time slice each
 	// line occurs

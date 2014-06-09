@@ -1,4 +1,6 @@
 var detailTimebarController = (function() {
+	var detailTimebar = $("#detail-timebar");
+	var sliceStart;
 	//callback function
 	var onSlide = function(e){
 		var columns = $(e.currentTarget).find("td");
@@ -14,22 +16,24 @@ var detailTimebarController = (function() {
 		songModel.setStartTimes(ranges);
 	}
 
-	// has to be its own function up here to prevent capturing i
-	// var modifyStartTime = function(lineNum) {
-	// 	return function() {
-	// 		songModel.setStartTime(lineNum, $(this).val());
-	// 	}
-	// };
+	var seeker = $("#detail-timebar-seeker");
+	seeker.click(function(e) {
+		debugger;
+		var pctOffset = (e.pageX - seeker.offset().x) / seeker.width();
+		songModel.seekInSlice(pctOffset);
+	});
 
 	return {
 		// TODO weird args
 		// TODO this is getting called twice when I move regular timebar
-		updateLines: function(lines, sliceStart, sliceDuration) {
-			var row = $("<tr>");
-			var detailTimebar = $("#detail-timebar");
+		updateLines: function(lines, sliceStart_, sliceDuration) {
+			sliceStart   = sliceStart_
+			var row      = $("<tr>");
+			var detached = seeker.detach();
 			detailTimebar.find("table").colResizable({ disable: true });
 			detailTimebar
 				.empty()
+				.append(seeker)
 				.append($("<table>")
 				.attr("id", "range")
 				.attr("width", "100%")
@@ -46,7 +50,8 @@ var detailTimebarController = (function() {
 			}
 			row.append($("<td>").attr("width", 100 - widthUsed + '%'));
 
-			$("#range").colResizable({
+			var range = $("#range");
+			range.colResizable({
 				liveDrag:true, 
 				draggingClass:"rangeDrag", 
 				gripInnerHtml:"<div class='rangeGrip'></div>", 
@@ -54,6 +59,10 @@ var detailTimebarController = (function() {
 				minWidth:8,
 				tabText: _.pluck(lines, 'korean')
 			});
+			range.click(function() {
+				console.log("HI IM A TABLE");
+			});
+
 		}
 	};
 })();

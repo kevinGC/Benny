@@ -39,6 +39,12 @@
 	width: 900px;
 }
 
+#detail-timebar-seeker {
+	position: absolute;
+	width: 900px;
+	height: 30px;
+}
+
 #detail-timebar:before{
 	display:block;
 	background-image: url('../res/img/rangeBar.png');	
@@ -73,6 +79,10 @@
 #text{
 	color:#034a92;
 	float:right;
+}
+
+#lyrics input {
+	width: 40px;
 }
 
 
