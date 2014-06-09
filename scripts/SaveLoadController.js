@@ -21,7 +21,7 @@ var saveLoadController = (function() {
 	};
 
 	var onUploadLyrics = function() {
-		window.songModel = new SongModel($(".left-pane>form>textarea").val());
+		window.songModel = songModel($(".left-pane>form>textarea").val());
 		$(".left-pane>form").remove();
 		setInterval(function() { 
 			songModel.setTime(videoController.getTime());

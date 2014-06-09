@@ -80,7 +80,7 @@ $(function() {
 	// set up our model
 	var songName = Utility.parseArgs().song;
 	if(songName) {
-		window.songModel = new SongModel(SongManager.getSong(songName));
+		window.songModel = songModel(SongManager.getSong(songName));
 		// TODO this shouldn't be here and in SaveLoadController
 		setInterval(function() { 
 			songModel.setTime(videoController.getTime());
