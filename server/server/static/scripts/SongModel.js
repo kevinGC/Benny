@@ -67,27 +67,6 @@ var songModel = function(songData) {
 		}
 	};
 
-	var initWithLyricsData = function(lyricsData) {
-		var dataLines = lyricsData.split('\n');
-		song = {
-			name    : dataLines[0],
-			duration: dataLines[1],
-			lines   : []
-		}
-		// create _song's 'lines' attribute
-		dataLines.splice(0, 2);
-		var numLines = dataLines.length / 2;
-		var timePerLyric = song.duration / numLines;
-		for(var i = 0; i < numLines; i++) {
-			song.lines.push({
-				english  : dataLines[i],
-				korean   : dataLines[i + numLines],
-				startTime: i * timePerLyric,
-				metadata : []
-			});
-		}
-	};
-
 	// strategies dictating how SongModel updates the world
 	// var viewSongStrategy = function(songModel) {
 	// 	view.setVideo(songName);
@@ -224,7 +203,7 @@ var songModel = function(songData) {
 	if(typeof songData === 'object') {
 		song = songData;
 	} else if(typeof songData === 'string') {
-		initWithLyricsData(songData);
+		song = Utility.createSongJSON(songData);
 	} else {
 		throw new Error("Incorrect arguments");
 	}

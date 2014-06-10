@@ -4,6 +4,7 @@
 
 <meta charset="utf-8">
 <link rel="stylesheet" href="/static/styles/main.css" type="text/css">
+<link rel="stylesheet" href="/static/styles/create.css" type="text/css">
 
 </head>
 <body>
@@ -18,12 +19,11 @@
 		</ul>
 	</nav>
 	<div id="save-load-bar">
-		<form>
-			<!-- <li><button id="save">Save</button></li> -->
-			<!-- <button id="upload-lyrics">Upload lyrics file</button> -->
-			<textarea rows="2" cols="100" placeholder="Paste lyrics here"></textarea>
-			<button id="upload-video">Upload video file</button>
-			<button id="submit">Submit</button>
+		<form enctype="multipart/form-data">
+			<textarea id="song-data" name="data" rows="2" cols="100" placeholder="Paste lyrics here"></textarea>
+			<!-- <button id="upload-video">Upload video file</button> -->
+			<input id="upload-video" name="video" type="file"></input>
+			<button type="button" id="submit">Submit</button>
 		</form>
 	</div>
 </header>
@@ -32,6 +32,7 @@
 <script src="/static/scripts/underscore.js"></script>
 
 <script src="/static/scripts/Utility.js"></script>
+<!-- <script src="/static/scripts/SongModel.js"></script> -->
 <script src="/static/scripts/UploadController.js"></script>
 
 <script>

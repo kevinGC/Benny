@@ -13,3 +13,4 @@ TOOD
   * Slide segment back 1/2 segment size
 * Get create/upload capabilities working
 * Fix viewing - broken after refactoring from old create page
+* FLASK - video viewing is broken in chrome. Known bug, not much I can do :(

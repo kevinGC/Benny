@@ -1,21 +1,4 @@
-var saveLoadController = (function() {
-	// private funcs
-	// var uploadLyrics = function() {
-	// 	var lyricsForm = $("<form>")
-	// 		.append($("<textarea>")
-	// 			.attr("rows", "50")
-	// 			.attr("cols", "100"))
-	// 		.append($("<button>")
-	// 			.attr("type", "button")
-	// 			.html("Submit")
-	// 			.click(onUploadLyrics));
-	// 	$("header").after(lyricsForm)
-	// };
-
-	// var uploadBennyJSON = function() {
-
-	// };
-
+(function() {
 	var onUploadLyrics = function() {
 		window.songModel = songModel($(".left-pane>form>textarea").val());
 		$(".left-pane>form").remove();
@@ -24,12 +7,37 @@ var saveLoadController = (function() {
 		}, 50);
 	};
 
-	// initialization
-	// $("#upload-lyrics").click(uploadLyrics);
-	// $("#upload-benny").click(uploadBennyJSON);
-
-	// TODO useless at the moment
-	return {
-
+	var isValidSong = function(songData) {
+		// TODO
+		return true;
 	};
+
+	$("#submit").click(function() {
+		var songData = $("#song-data").val();
+		if(!isValidSong(songData)) {
+			alert("Invalid song data used"); // TODO inform about format
+			return;
+		}
+
+		// TODO is video valid?
+		// var data = {
+		// 	song : Utility.createSongJSON(songData),
+		// 	video: $("#upload-video").val()
+		// };
+		var formData = new FormData();
+		formData.append('song', Utility.createSongJSON(songData));
+		formData.append('video', $("#upload-video").get(0).files[0]);
+		// debugger;
+
+		$.ajax({
+			type       : 'POST',
+			url        : '/upload',
+			data       : formData,
+			processData: false,
+			contentType: false,
+			cache      : false,
+			success    : function() { console.log('Success :D'); },
+			error      : function() { console.log('Failure D:'); }
+		});
+	});
 })();
