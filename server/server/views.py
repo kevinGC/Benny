@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from server import app
 from flask import render_template
 from server.database import db, Song
@@ -15,9 +16,9 @@ def index():
 def view(songName):
 	return 'view a song called' + songName
 
-@app.route('/create/<songName>')
-def create(songName):
-	return 'edit a song called' + songName
+@app.route('/create/')
+def create():
+	return render_template('create.html')
 
 @app.route('/edit/<songName>')
 def edit(songName):

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/styles/main.css" type="text/css">
+
+</head>
+<body>
+
+<header>
+	<nav>
+		<ul>
+			<li><a href="index.html?song=Genie">Choose Song</a></li>
+			<li><a href="create.html">Create Song</a></li>
+			<li><a href="about.html">About</a></li>
+			<li><a href="https://github.com/kevinGC/Benny">Source</a></li>
+		</ul>
+	</nav>
+	<div id="save-load-bar">
+		<form>
+			<!-- <li><button id="save">Save</button></li> -->
+			<!-- <button id="upload-lyrics">Upload lyrics file</button> -->
+			<textarea rows="2" cols="100" placeholder="Paste lyrics here"></textarea>
+			<button id="upload-video">Upload video file</button>
+			<button id="submit">Submit</button>
+		</form>
+	</div>
+</header>
+
+<script src="/static/scripts/jquery-2.1.1.min.js"></script>
+<script src="/static/scripts/underscore.js"></script>
+
+<script src="/static/scripts/Utility.js"></script>
+<script src="/static/scripts/UploadController.js"></script>
+
+<script>
+// $(function() {
+// 	console.log("AYOGG");
+
+// 	// set up the model
+// 	window.songModel = songModel({{ song | safe }});
+// 	// TODO this shouldn't be here and in SaveLoadController
+// 	setInterval(function() { 
+// 		songModel.setTime(videoController.getTime());
+// 	}, 50);
+// });
+</script>
+
+</body>
+</html>

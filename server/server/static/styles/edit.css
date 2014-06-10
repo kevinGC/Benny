@@ -47,7 +47,7 @@
 
 #detail-timebar:before{
 	display:block;
-	background-image: url('../res/img/rangeBar.png');	
+	background-image: url('/static/img/rangeBar.png');	
 	background-position:0px 10px;
 	background-repeat: repeat-x;
 	margin-left:9px;
@@ -67,7 +67,7 @@
 	width:10px;
 	height:19px;
 	cursor:e-resize;
-	background-image: url('../res/img/slider.png');
+	background-image: url('/static/img/slider.png');
 	z-index:8;
 }
 
@@ -85,4 +85,6 @@
 	width: 40px;
 }
 
-
+#line-data input[type=text] {
+	width: 200px;
+}

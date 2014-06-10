@@ -22,7 +22,7 @@ body{
 
 #slider:before{
 	display:block;
-	background-image: url('../img/rangeBar.png');	
+	background-image: url('/static/img/rangeBar.png');	
 	background-position:0px 10px;
 	background-repeat: repeat-x;
 	margin-left:9px;
@@ -41,7 +41,7 @@ body{
 	width:10px;
 	height:19px;
 	cursor:e-resize;
-	background-image: url('../img/slider.png');
+	background-image: url('/static/img/slider.png');
 	z-index:8;
 }
 
