@@ -40,7 +40,7 @@ block content
   script.
     $(function() {
       console.log('AYOGG');
-      window.songModel = songModel(!{songJSON}); // set up the model
+      window.songModel = songModel(!{songJSON}, '#{videoPath}'); // set up the model
       // TODO this shouldn't be here and in SaveController
       setInterval(function() { 
         songModel.setTime(videoController.getTime());

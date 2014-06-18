@@ -1,5 +1,5 @@
 // TODO better singleton
-var songModel = function(songData) {
+var songModel = function(songData, videoPath) {
 	var that = {};
 
 	// PRIVATE
@@ -79,7 +79,7 @@ var songModel = function(songData) {
 	// 	}
 	// };
 
-	var createSongStrategy = function() {
+	var createSongStrategy = function(videoPath) {
 		var that = {};
 
 		// PRIVATE
@@ -117,7 +117,7 @@ var songModel = function(songData) {
 		setLinesInSlice();
 		setCurrentLine();
 		lyricsController.updateLyrics(getLyricsData());
-		videoController.updateVideo(song.name);
+		videoController.updateVideo(videoPath);
 		timebarController.init(sliceDuration, song.duration);
 		lineDataController.updateLine(currentLine, currentLineNum);
 		updateTimeSlice();
@@ -207,6 +207,6 @@ var songModel = function(songData) {
 	} else {
 		throw new Error("Incorrect arguments");
 	}
-	strategy = createSongStrategy();
+	strategy = createSongStrategy(videoPath);
 	return that;
 };

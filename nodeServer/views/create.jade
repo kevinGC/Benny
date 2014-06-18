@@ -9,7 +9,7 @@ block content
     form(action='/upload', method='post', enctype='multipart/form-data')
       textarea(id='song-data', name='data', rows='2', cols='100', placeholder='Paste lyrics here')
       input(name='video', type='file')
-      input(type='submit')
+      input(id='submit', type='submit')
 
   script(src='/javascripts/jquery-2.1.1.min.js')
   script(src='/javascripts/underscore.js')

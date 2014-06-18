@@ -1,5 +1,7 @@
-var MongoClient = require('mongodb').MongoClient;
-// var async       = requier('async');
+var mongo  = require('mongodb');
+
+var MongoClient = mongo.MongoClient;
+var BSON        = mongo.BSONPure;
 
 
 var dbQuery = function(query) {
@@ -13,28 +15,27 @@ var dbQuery = function(query) {
 
 // TODO I refer to song/songData/lyricsData differently in different places. Fix that
 exports.insertSong = function(songData, video) {
-  var insertHelper = function(record) {
-    return function(collection) {
-      collection.insert(record, function(err, docs) {
-        collection.count(function(err, count) {
-          console.log(format("count = %s", count));
-        });
-        collection.find().toArray(function(err, results) {
-          console.dir(results);
-          db.close(); // TODO is this reasonable?
-        });
-      });
-    }
-  };
-
-  dbQuery(insertHelper({ songData: songData, video: video }));
+  dbQuery(function(collection) {
+    collection.insert({
+      name : songData.name,
+      data : songData,
+      video: video
+    }, function(err, ins) {
+      if(err)
+        console.log(err);
+    });
+  });
 };
 
-exports.findSong = function(id) {
+exports.findSong = function(id, cb) {
   dbQuery(function(collection) {
-    collection.find({ _id: id }, function(record) {
-
-    })
+    collection.findOne({ _id: new BSON.ObjectID(id) }, function(err, result) {
+      if(err)
+        throw err;
+      console.log('result:');
+      console.log(result);
+      cb(result);
+    });
   });
 }
 
@@ -43,22 +44,7 @@ exports.getAllSongs = function(cb) {
     collection.find({}, { name: true }).toArray(function(err, results) {
       if(err)
         throw err;
-      console.log('results ' + results);
-      console.log(results);
       cb(results);
     });
-    // var songs = [];
-    // var cursor = collection.find();
-    // console.log(cursor);
-    // var songs = cursor.toArray(function(songs) {
-    //   console.log('oy, we got songs here!' + songs);
-    //   cb(songs);
-    // });
-    // while(cursor.hasNext()) {
-    //   var next = cursor.next();
-    //   songs.push(next.name, next._id);
-    // }
-    // console.log('oy, we got songs here!' + songs);
-    // cb(songs);
   });
 }

@@ -1,15 +1,11 @@
 var express  = require('express');
 var database = require('../database');
-// var async    = require('async');
+// var app      = require('../app');
 
-var router  = express.Router();
+var router = express.Router();
 
 router.get('/', function(req, res) {
-  console.log('index called');
-  // var songs = ['Genie']; // TODO
   database.getAllSongs(function(songs) {
-    console.log('songs:' + songs);
-    console.log(songs);
     res.render('list', {
       songs: songs,
       title: 'Songs'
@@ -27,13 +23,18 @@ router.get('/create', function(req, res) {
   res.render('create');
 });
 
-router.get('/edit/:songName', function(req, res) {
-  console.log('edit ' + req.params.songName + ' called');
-  var song = {"name":"Genie","duration":212,"lines":[{"english":"Tell me your wish","korean":"소원을 말해봐","startTime":9.5,"metadata":[{"start":0,"length":2,"info":"소월: wish","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=소원"},{"start":2,"length":1,"info":"object particle","link":"http://www.talktomeinkorean.com/lessons/level-2-lesson-2-%EC%9D%84-%EB%A5%BC-object-marking-particles/"},{"start":4,"length":2,"info":"말하다: to say/talk","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=말하다"},{"start":5,"length":2,"info":"grammar: to try","link":"http://www.talktomeinkorean.com/lessons/level-4-lesson-12/"}]},{"english":"Tell me that small dream you have within you","korean":"니 마음속에 있는 작은 꿈을 말해봐","startTime":12,"metadata":[{"start":0,"length":1,"info":"니: informal you","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=니"},{"start":2,"length":3,"info":"마음속: one's mind/heart","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=마음속"},{"start":5,"length":1,"info":"grammar: in","link":"http://www.talktomeinkorean.com/lessons/l1l18/"},{"start":7,"length":1,"info":"있다: to have","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=있다"},{"start":8,"length":1,"info":"grammar: verb to adj mod","link":"http://www.talktomeinkorean.com/lessons/level-3-lesson-14/"},{"start":10,"length":1,"info":"작다: to be small","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=작다"},{"start":11,"length":1,"info":"grammar: vert to adj mod","link":"http://www.talktomeinkorean.com/lessons/level-3-lesson-14/"},{"start":13,"length":1,"info":"꿈: dream","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=꿈"},{"start":14,"length":1,"info":"object particle","link":"http://www.talktomeinkorean.com/lessons/level-2-lesson-2-%EC%9D%84-%EB%A5%BC-object-marking-particles/"},{"start":15,"length":2,"info":"말하다: to say/talk","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=말하다"},{"start":16,"length":2,"info":"grammar: to try","link":"http://www.talktomeinkorean.com/lessons/level-4-lesson-12/"}]},{"english":"Draw that ideal person you have inside your head","korean":"니 머리에있는 이상형을 그려봐","startTime":16,"metadata":[{"start":0,"length":1,"info":"니: you","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=니"},{"start":2,"length":2,"info":"머리: head/mind","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=머리"},{"start":4,"length":1,"info":"in","link":"http://www.talktomeinkorean.com/lessons/l1l18/"},{"start":5,"length":1,"info":"있다: to have","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=있다"},{"start":6,"length":1,"info":"verb to adj mod","link":"http://www.talktomeinkorean.com/lessons/level-3-lesson-14/"},{"start":8,"length":3,"info":"이상형: ideal type","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=이상형"},{"start":11,"length":1,"info":"object particle","link":"http://www.talktomeinkorean.com/lessons/level-2-lesson-2-%EC%9D%84-%EB%A5%BC-object-marking-particles/"},{"start":13,"length":2,"info":"그리다: to draw","link":"http://endic.naver.com/search.nhn?sLn=en&searchOption=all&query=그리다"},{"start":14,"length":2,"info":"grammar: to try","link":"http://www.talktomeinkorean.com/lessons/level-4-lesson-12/"}]},{"english":"And then look at me","korean":"그리고 나를 봐","startTime":20.1,"metadata":[]},{"english":"I'm your genie, your dream, your genie","korean":"난 너의 GENIE야, 꿈이야, GENIE야","startTime":21.6,"metadata":[]},{"english":"Get in your dream car and speed off","korean":"드림카를 타고 달려봐","startTime":26.1,"metadata":[]},{"english":"You're sitting next to me","korean":"넌 내옆자리에 앉아","startTime":28.3,"metadata":[]},{"english":"Just throw everything into my guidance","korean":"그저 내 이끌림 속에 모두 던져","startTime":30.6,"metadata":[]},{"english":"Even if your overwhelmed heart was to explode","korean":"가슴벅차 터져버려도","startTime":34.2,"metadata":[]},{"english":"Even if it all flies away in the wind","korean":"바람결에 날려버려도","startTime":36.1,"metadata":[]},{"english":"Right now, this moment, the world is yours","korean":"지금 이 순간 세상은 너의 것","startTime":38.2,"metadata":[]},{"english":"That's right, I love you","korean":"그래요 난 널 사랑해","startTime":40,"metadata":[]},{"english":"You can always believe in me","korean":"언제나 믿어","startTime":43.8,"metadata":[]},{"english":"Dreams, passions","korean":"꿈도 열정도","startTime":45.7,"metadata":[]},{"english":"I want to give them all to you","korean":"다 주고 싶어","startTime":47.6,"metadata":[]},{"english":"I'm wanting to answer your wishes","korean":"난 그대 소원을 이뤄주고 싶은 (싶은)","startTime":49.3,"metadata":[]},{"english":"Your goddess of fortune","korean":"행운의 여신","startTime":54.1,"metadata":[]},{"english":"Tell me your wish (I'm genie for you boy)","korean":"소원을 말해봐 (I'm Genie for you boy)","startTime":56.1,"metadata":[]},{"english":"Tell me your wish (I'm genie for your wish)","korean":"소원을 말해봐! (I'm Genie for your wish)","startTime":59.7,"metadata":[]},{"english":"Tell me your wish (I'm genie for your dream)","korean":"소원을 말해봐 (I'm Genie for your dream)","startTime":63.3,"metadata":[]},{"english":"Tell it only to me (I'm Genie for your world) ","korean":"내게만 말해봐! (I'm Genie for your world) ","startTime":67.8,"metadata":[]},{"english":"Tell me your wish","korean":"소원을 말해봐","startTime":72.2,"metadata":[]},{"english":"Aren't you tired of the boring days","korean":"지루한 날들이 넌 지겹지 않니?","startTime":74.8,"metadata":[]},{"english":"Have you become buried by your ordinary life?","korean":"평범한 생활에 넌 묻혀버렸니?","startTime":78.9,"metadata":[]},{"english":"Now stop and wake up","korean":"이제 그만 깨어나","startTime":83,"metadata":[]},{"english":"You are my superstar, shining star, super star","korean":"넌 나의 Superstar, Shining Star, Superstar","startTime":85,"metadata":[]},{"english":"Release your body into the trembling beating of your heart like a Harley","korean":"심장소리 같은 떨림의 Harley에 네 몸을 맡겨봐","startTime":88.8,"metadata":[]},{"english":"Now this world is simply your stage","korean":"이제 이 세상은 오직 너의 무대","startTime":92.9,"metadata":[]},{"english":"A wave of cheers","korean":"환호소리 같은 파도가","startTime":96.7,"metadata":[]},{"english":"In my heart, your body temperature, I'm your path.","korean":"내 가슴엔 너의 체온이 나는 길","startTime":98.7,"metadata":[]},{"english":"Forever your biggest fan","korean":"영원한 Biggest Fan","startTime":101.9,"metadata":[]},{"english":"That's right, I love you","korean":"그래요 난 널 사랑해","startTime":103.5,"metadata":[]},{"english":"You can always believe in me","korean":"언제나 믿어","startTime":106.7,"metadata":[]},{"english":"Dreams, passions","korean":"꿈도 열정도","startTime":108.2,"metadata":[]},{"english":"I want to give them all to you","korean":"다 주고 싶어","startTime":110.35,"metadata":[]},{"english":"I'm wanting to answer your wishes","korean":"난 그대 소원을 이뤄주고 싶은 (싶은)","startTime":112,"metadata":[]},{"english":"Your goddess of fortune","korean":"행운의 여신","startTime":116.6,"metadata":[]},{"english":"Tell me your wish (I'm genie for you boy)","korean":"소원을 말해봐 (I'm Genie for you boy)","startTime":118.2,"metadata":[]},{"english":"Tell me your wish (I'm genie for your wish)","korean":"소원을 말해봐! (I'm Genie for your wish)","startTime":122,"metadata":[]},{"english":"Tell me your wish (I'm genie for your dream)","korean":"소원을 말해봐 (I'm Genie for your dream)","startTime":125.1,"metadata":[]},{"english":"Tell it only to me (I'm Genie for your world) ","korean":"내게만 말해봐! (I'm Genie for your world) ","startTime":129.8,"metadata":[]},{"english":"DJ Put it back on","korean":"DJ Put it back on","startTime":147.9,"metadata":[]},{"english":"That's right, I love you","korean":"그래요 난 널 사랑해","startTime":150.3,"metadata":[]},{"english":"You can always believe in me","korean":"언제나 믿어","startTime":153.2,"metadata":[]},{"english":"Dreams, passions","korean":"꿈도 열정도","startTime":154.9,"metadata":[]},{"english":"I want to give them all to you","korean":"다 주고 싶어","startTime":157.2,"metadata":[]},{"english":"I'm wanting to answer your wishes","korean":"난 그대 소원을 이뤄주고 싶은 (싶은)","startTime":158.6,"metadata":[]},{"english":"Your goddess of fortune","korean":"행운의 여신","startTime":163.4,"metadata":[]},{"english":"Tell me your wish!","korean":"소원을 말해봐!","startTime":164.9,"metadata":[]},{"english":"That's right, I love you","korean":"그래요 난 널 사랑해","startTime":167,"metadata":[]},{"english":"You are my Music","korean":"넌 나의 Music","startTime":168.8,"metadata":[]},{"english":"I love you","korean":"난 널 사랑해","startTime":170.9,"metadata":[]},{"english":"You are my joy","korean":"넌 나의 기쁨","startTime":172.8,"metadata":[]},{"english":"I love you","korean":"난 널 사랑해","startTime":174.5,"metadata":[]},{"english":"I want to become your luck","korean":"난 너의 행운이 되고 싶어","startTime":176.7,"metadata":[]},{"english":"(Tell me your fantasy, without holding back","korean":"(너의 Fantasy를 숨김없이 말해봐","startTime":9999,"metadata":[]},{"english":"I'll show you the genie's path","korean":"나는 Genie길을 보여줄게","startTime":9999,"metadata":[]},{"english":"Tell me your wish, without holding back","korean":"니가 가진 소원 숨김없이 말해봐","startTime":9999,"metadata":[]},{"english":"I, your genie, will grant them)","korean":"너의 Genie 내가 들어줄게)","startTime":9999,"metadata":[]},{"english":"Tell me your wish (I'm genie for you boy)","korean":"소원을 말해봐 (I'm Genie for you boy)","startTime":180.5,"metadata":[]},{"english":"Tell me your wish (I'm genie for your wish)","korean":"소원을 말해봐! (I'm Genie for your wish)","startTime":184.4,"metadata":[]},{"english":"Tell me your wish (I'm genie for your dream)","korean":"소원을 말해봐 (I'm Genie for your dream)","startTime":188.4,"metadata":[]},{"english":"Tell it only to me (I'm genie for your dream)","korean":"소원을 말해봐! (I'm Genie for your world)","startTime":193,"metadata":[]},{"english":"Tell me your wish (I'm genie for you boy)","korean":"소원을 말해봐 (I'm Genie for you boy)","startTime":196.1,"metadata":[]},{"english":"Tell me your wish (I'm genie for your wish)","korean":"소원을 말해봐! (I'm Genie for your wish)","startTime":200.1,"metadata":[]}]};
-  res.render('edit', {
-   songJSON: JSON.stringify(song),
-   name    : song.name
- });
+router.get('/edit/:songID', function(req, res) {
+  console.log('edit ' + req.params.songID + ' called');
+  database.findSong(req.params.songID, function(record) {
+    // console.log(record);
+    console.log('/videos/' + record.video);
+    res.render('edit', {
+     songJSON: JSON.stringify(record.data),
+     // songJSON: songData,
+     videoPath: '/videos/' + record.video, // TODO app.get didn't work...
+     id: record._id
+   });
+  });
 });
 
 router.get('/about', function(req, res) {
@@ -41,14 +42,35 @@ router.get('/about', function(req, res) {
 });
 
 router.post('/upload', function(req, res) {
-  // TODO
-  console.log('oy');
-  // console.log(req);
-  console.log(req.files);
-  console.log(req.files.video);
-  console.log(req.files.song);
-  res.send('TODO');
-
+  var songData = processSongData(req.body.data);
+  if(songData) {
+    database.insertSong(songData, req.files.video.name);
+  }
+  res.redirect('/');
 });
+
+var processSongData = function(songData) {
+  var dataLines = songData.split('\n');
+  var song = {
+    name    : dataLines[0],
+    duration: dataLines[1],
+    lines   : []
+  }
+  if(song.name === NaN || song.duration === NaN || dataLines.length % 2 !== 0)
+    return null;
+
+  dataLines.splice(0, 2);
+  var numLines = dataLines.length / 2;
+  var timePerLyric = song.duration / numLines;
+  for(var i = 0; i < numLines; i++) {
+    song.lines.push({
+      english  : dataLines[i],
+      korean   : dataLines[i + numLines],
+      startTime: i * timePerLyric,
+      metadata : []
+    });
+  }
+  return song;
+}
 
 module.exports = router;
