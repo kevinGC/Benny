@@ -1,0 +1,14 @@
+extends layout
+
+block head
+  title Song list
+
+block content
+  ul
+    - for (var i = 0; i < songs.length; i++)
+      li
+        h2= songs[i].name
+        a(href='/view/#{songs[i]._id}') View
+        a(href='/edit/#{songs[i]._id}') Edit
+
+  script(src='/javascripts/jquery-2.1.1.min.js')
