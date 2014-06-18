@@ -14,23 +14,17 @@ router.get('/', function(req, res) {
 });
 
 router.get('/view/:songName', function(req, res) {
-  console.log('view ' + req.params.songName + ' called');
   res.render('view', { songName: req.params.songName })
 });
 
 router.get('/create', function(req, res) {
-  console.log('create called');
   res.render('create');
 });
 
 router.get('/edit/:songID', function(req, res) {
-  console.log('edit ' + req.params.songID + ' called');
   database.findSong(req.params.songID, function(record) {
-    // console.log(record);
-    console.log('/videos/' + record.video);
     res.render('edit', {
      songJSON: JSON.stringify(record.data),
-     // songJSON: songData,
      videoPath: '/videos/' + record.video, // TODO app.get didn't work...
      id: record._id
    });

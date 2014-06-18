@@ -3,3 +3,4 @@
 *.ogg
 *.pyc
 *.log
+node_modules/

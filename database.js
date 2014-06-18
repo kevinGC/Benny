@@ -32,8 +32,6 @@ exports.findSong = function(id, cb) {
     collection.findOne({ _id: new BSON.ObjectID(id) }, function(err, result) {
       if(err)
         throw err;
-      console.log('result:');
-      console.log(result);
       cb(result);
     });
   });
